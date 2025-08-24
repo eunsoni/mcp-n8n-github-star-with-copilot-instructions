@@ -1,0 +1,95 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "hour": 9
+            }
+          ]
+        }
+      },
+      "id": "cron-trigger",
+      "name": "Daily 9AM Trigger",
+      "position": [
+        240,
+        304
+      ],
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/repos/microsoft/vscode",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "n8n-automation"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "github-request",
+      "name": "Get VSCode Stars",
+      "position": [
+        464,
+        304
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "",
+          "mode": "id"
+        },
+        "text": "=🌟 **GitHub VSCode Daily Stars Report** 🌟\n\nRepository: microsoft/vscode\nCurrent Stars: {{ $json.stargazers_count }}\nForks: {{ $json.forks_count }}\nWatchers: {{ $json.watchers_count }}\n\nLast updated: {{ new Date().toLocaleString() }}\n\n🔗 Repository Link: {{ $json.html_url }}\n\nGreat job VSCode team! 🚀",
+        "otherOptions": {}
+      },
+      "id": "slack-message",
+      "name": "Send to Slack",
+      "position": [
+        688,
+        304
+      ],
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2
+    }
+  ],
+  "connections": {
+    "Daily 9AM Trigger": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Get VSCode Stars",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Get VSCode Stars": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Send to Slack",
+            "type": "main"
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "17c51291071332766b4678310b76ad48b26310d41cd236e3b9a8a75320ccd57f"
+  }
+}
