@@ -7,6 +7,8 @@
 - Slack Credential: Bot User OAuth Token (형식: `xoxb-...`) — n8n의 Credentials에만 저장하세요.
 - Slack Channel ID: 채널 고유 ID (예: `C0122KQ70S7E`)
 
+<img width="625" height="873" alt="image" src="https://github.com/user-attachments/assets/53b8f275-c298-480a-995a-9c36fa9f05e5" />
+
 ## 단계별 가이드
 1. 워크플로우 임포트
    - n8n 대시보드 → Workflows → Import → "Paste from JSON" 선택
@@ -32,17 +34,6 @@
 
 ## 채널 ID 확인 방법
 - Slack에서 채널을 열고 URL 마지막 부분을 확인합니다: `https://app.slack.com/client/TXXXX/C0122KQ70S7E` → `C0122KQ70S7E`가 채널 ID입니다.
-
-## 보안 안내
-- 민감한 토큰/키는 절대 레포에 커밋하지 마세요.
-- CI 환경에서는 GitHub Secrets 또는 CI 전용 비밀 저장소를 사용하세요.
-
-## 이미지(옵션)
-- 스크린샷을 추가하려면 저장소에 `assets/` 폴더를 만들고 이미지 파일(`assets/slack-node.png`)을 넣은 뒤 README에 다음을 추가하세요:
-
-```
-![Slack node screenshot](./assets/slack-node.png)
-```
 
 ## 문제 발생 시
 - 임포트/설정 중 오류가 생기면 스크린샷을 첨부해 알려주세요. README에 예시 이미지를 추가해 드립니다.
